@@ -6,7 +6,10 @@ const API = 'https://api.openweathermap.org/data/2.5/weather?q=Turek&appid=e53dc
 class App extends Component {
   state={
     cityName: 'Turek',
-    cityWeather: []
+    cityTemp: [],
+    cityClouds: [],
+    cityWind: [],
+    citySun: []
   }
 
   handleGetWeather = ()=>{
@@ -14,10 +17,13 @@ class App extends Component {
     .then(resp => (resp.json()))
     .then(resp => (
       this.setState({
-        cityWeather: resp.main
+        cityTemp: resp.main,
+        cityClouds: [resp.weather[0].main, resp.weather[0].description],
+        cityWind: resp.wind,
+        citySun: [resp.sys.sunrise, resp.sys.sunrise]
       })
     ))
-    .then(console.log(this.state.cityWeather))
+    .then(console.log(this.state))
   }
 
   
